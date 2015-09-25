@@ -1,2 +1,2 @@
 # starside
-The science fiction game in the world
+The best science fiction game in the world
