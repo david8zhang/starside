@@ -22,8 +22,7 @@ public class GameManager : MonoBehaviour {
 
 	public bool showTutorial;
 
-	void Awake()
-	{
+	void Awake() {
 		if (instance == null)
 			instance = this;
 		else if (instance != this)
@@ -56,8 +55,8 @@ public class GameManager : MonoBehaviour {
 		}*/
 
 
-		board.InitBoard();
-		StartCoroutine("Init");
+		board.InitBoard(); //Creates the floor tiles
+		StartCoroutine("Init"); 
 	}
 
 	void Update()
@@ -74,8 +73,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private IEnumerator Init()
-	{
+	private IEnumerator Init() {
 		// Request Interstitial ad 3 games before it is displayed
 		if (ScoreManager.instance.gamesPlayed % 6 - 3 == 0)
 			AdManager.instance.RequestInterstitial();
@@ -98,8 +96,7 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine("Aim");
 	}
 
-	private IEnumerator Aim()
-	{
+	private IEnumerator Aim() {
 		// Speed of aimer increases logarithmically as level increases
 		// I found this equation just thru a graphing calc and tweaking
 		float speed = (3.0f * Mathf.Log10(board.level + 1.0f) + 3.5f);
@@ -113,11 +110,9 @@ public class GameManager : MonoBehaviour {
 		int targetX = -1;
 		int targetY = -1;
 
-		while (aiming)
-		{
+		while (aiming) {
 			// if aimer is finished aiming, get target coords and start next coroutine
-			if (aimers[aimerIndex].aimed)
-			{
+			if (aimers[aimerIndex].aimed) {
 				aiming = false;
 				targetX = aimers[aimerIndex].targetX;
 				targetY = aimers[aimerIndex].targetY;
@@ -131,13 +126,11 @@ public class GameManager : MonoBehaviour {
 		StartCoroutine(ProcessAim (targetX, targetY));
 	}
 	
-	private IEnumerator ProcessAim(int targetX, int targetY)
-	{
+	private IEnumerator ProcessAim(int targetX, int targetY) {
 		//Debug.Log ("Enter: ProcessAim");
 
 		// if there is an enemy at the target x and y positions
-		if (board.board[targetY, targetX] != null)
-		{
+		if (board.board[targetY, targetX] != null) {
 			// set the aimer's center to animates
 			aimers[aimerIndex].hitTarget(true);
 
@@ -150,8 +143,7 @@ public class GameManager : MonoBehaviour {
 				yield return null;
 
 			// check if all enemy tiles are cleared
-			if (board.checkIfBoardClear())
-			{
+			if (board.checkIfBoardClear()) {
 				score += 5;
 				SoundManager.instance.RandomizeSfxGame(levelUp);
 
@@ -167,11 +159,10 @@ public class GameManager : MonoBehaviour {
 				board.level ++;
 				board.populated = false;
 				
-				StartCoroutine("Init");
+				StartCoroutine("Init"); //Reinitalizes the board
 			}
 			// normal hit
-			else
-			{
+			else {
 				SoundManager.instance.RandomizeSfxGame(hitGreen);
 
 				// shorthand for if aimerIndex is 0, set to 1, else, set to 0
@@ -198,7 +189,7 @@ public class GameManager : MonoBehaviour {
 			// Report the score to the score manager
 			ScoreManager.instance.UpdateScore(score);
 		}
-		else
+		else //If they missed the enemy
 		{
 			SoundManager.instance.RandomizeSfxGame(hitRed);
 			// set the aimer's center to animate

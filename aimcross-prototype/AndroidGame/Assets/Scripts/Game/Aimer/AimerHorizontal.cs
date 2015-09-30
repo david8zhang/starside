@@ -94,8 +94,7 @@ public class AimerHorizontal : MonoBehaviour {
 		 * */
 		float counter = 0.0f;
 		while(Vector3.Distance (transform.position, destPos) > Mathf.Epsilon &&
-		      counter <= 0.05f)
-		{
+		      counter <= 0.05f) {
 			counter += Time.deltaTime;
 			setPosition(Vector3.SmoothDamp(transform.position, destPos, ref velocity, 0.05f));
 			yield return null;
@@ -104,8 +103,7 @@ public class AimerHorizontal : MonoBehaviour {
 		yield return null;
 	}
 
-	void setPosition(Vector3 pos)
-	{
+	void setPosition(Vector3 pos) {
 		transform.position = pos;
 		// aimerC is updated whenever this transform position is updated
 		aimerC.setY(this.transform.position.y);

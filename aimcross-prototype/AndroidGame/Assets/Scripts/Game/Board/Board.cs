@@ -7,7 +7,7 @@ public class Board : MonoBehaviour {
 
 	public int[,] boardGen = new int[boardSize, boardSize];
 	public Floor[,] floorTiles = new Floor[boardSize, boardSize];
-	public BoardTile[,] board = new BoardTile[boardSize, boardSize];
+	public BoardTile[,] board = new BoardTile[boardSize, boardSize]; //Why not name this Tile instead of board? Very confusing
 
 	// Prefabs
 	public GameObject floorPrefab;
@@ -22,36 +22,28 @@ public class Board : MonoBehaviour {
 	public float waitTimer;
 
 	// TODO: spawn a set number of enemy tiles per level instead of just random
-	void Start()
-	{
+	void Start() {
 
 	}
 
-	public void InitBoard()
-	{
+	public void InitBoard() {
 		// initialize board completely with floor tiles
-		for (int x = 0; x < boardSize; x ++)
-		{
-			for (int y = 0; y < boardSize; y ++)
-			{
+		for (int x = 0; x < boardSize; x ++) {
+			for (int y = 0; y < boardSize; y ++) {
 				floorTiles[y, x] = CreateNewTile(floorPrefab, x, y).GetComponent<BoardTile>() as Floor;
 			}
 		}
 	}
 
-	public void PopulateBoardFromLayout(int[,] layout)
-	{
+	public void PopulateBoardFromLayout(int[,] layout) {
 		boardGen = layout;
 		StartCoroutine("InitBoardAnim");
 	}
 
-	public void PopulateBoard()
-	{
+	public void PopulateBoard() {
 		// reset the boardGen
-		for (int x = 0; x < boardSize; x ++)
-		{
-			for (int y = 0; y < boardSize; y ++)
-			{
+		for (int x = 0; x < boardSize; x ++) {
+			for (int y = 0; y < boardSize; y ++) {
 				boardGen[y, x] = 0;
 			}
 		}
@@ -80,15 +72,11 @@ public class Board : MonoBehaviour {
 		StartCoroutine("InitBoardAnim");
 	}
 
-	IEnumerator InitBoardAnim()
-	{
-		for (int x = 0; x < boardSize; x ++)
-		{
-			for (int y = 0; y < boardSize; y ++)
-			{
+	IEnumerator InitBoardAnim() {
+		for (int x = 0; x < boardSize; x ++) {
+			for (int y = 0; y < boardSize; y ++) {
 				// if the boardGen is set to something that is not a floor tile
-				if (boardGen[y, x] != 0)
-				{
+				if (boardGen[y, x] != 0) {
 					// have a random delay before animating the tiles so they don't all animate at the same time
 					float delay = Random.value;
 					GameObject obj = null;
@@ -101,6 +89,7 @@ public class Board : MonoBehaviour {
 
 					obj.SetActive (false);
 
+                    //Coroutine to animate the tiles when board is initialized
 					StartCoroutine (AnimateTile(obj, delay, x, y));
 
 				}
@@ -114,8 +103,7 @@ public class Board : MonoBehaviour {
 		yield return null;
 	}
 
-	IEnumerator AnimateTile(GameObject tile, float delay, int x, int y)
-	{
+	IEnumerator AnimateTile(GameObject tile, float delay, int x, int y) {
 		yield return new WaitForSeconds(delay);
 
 		// make the floor tile invisible and the enemy tile visible
@@ -128,8 +116,8 @@ public class Board : MonoBehaviour {
 		enemy.animate ();
 	}
 	
-	public GameObject CreateNewTile(GameObject prefab, int x, int y)
-	{
+    /**Creates new tiles with the given gameObject Prefabs, and positions */ 
+	public GameObject CreateNewTile(GameObject prefab, int x, int y) {
 		GameObject o = Instantiate (prefab, new Vector3(x, y), Quaternion.identity) as GameObject;
 		o.transform.SetParent(this.transform);
 		o.GetComponent<BoardTile>().board = this;
@@ -137,12 +125,9 @@ public class Board : MonoBehaviour {
 	}
 
 	// check if the board is empty (there are no more active enemy tiles)
-	public bool checkIfBoardClear()
-	{
-		for (int x = 0; x < boardSize; x ++)
-		{
-			for (int y = 0; y < boardSize; y ++)
-			{
+	public bool checkIfBoardClear() {
+		for (int x = 0; x < boardSize; x ++) {
+			for (int y = 0; y < boardSize; y ++) {
 				if (board[y, x] != null)
 					return false;
 			}
@@ -150,25 +135,20 @@ public class Board : MonoBehaviour {
 		return true;
 	}
 
-	public void Wait()
-	{
+	public void Wait() {
 		// if waitTimer coroutine has been started already
-		if (waitTimer > 0)
-		{
+		if (waitTimer > 0) {
 			waitTimer = 1.0f;
 		}
-		else
-		{
+		else {
 			waitTimer = 1.0f;
 			StartCoroutine("WaitForButtonProcess");
 		}
 	}
 
-	IEnumerator WaitForButtonProcess()
-	{
+	IEnumerator WaitForButtonProcess() {
 		waiting = true;
-		while (waitTimer > 0)
-		{
+		while (waitTimer > 0) {
 			waitTimer -= Time.deltaTime;
 			yield return null;
 		}

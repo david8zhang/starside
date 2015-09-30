@@ -27,27 +27,22 @@ public class Aimer : MonoBehaviour {
 		aimerV.aimerC = this.aimerC;
 	}
 
-	public void Aim()
-	{
+	public void Aim() {
 		StartCoroutine("AimH");
 	}
 
-	void Update()
-	{
-		if (paused)
-		{
+	void Update() {
+		if (paused) {
 			aimerH.paused = true;
 			aimerV.paused = true;
 		}
-		else
-		{
+		else {
 			aimerH.paused = false;
 			aimerV.paused = false;
 		}
 	}
 
-	IEnumerator AimH()
-	{
+	IEnumerator AimH() {
 		aimerH.speed = aimerSpeed;
 		aimerV.speed = aimerSpeed;
 
@@ -55,10 +50,8 @@ public class Aimer : MonoBehaviour {
 		aimerH.gameObject.SetActive (true);
 		aimerH.aiming = true;
 		// if the mouse button isn't pressed or if paused, do nothing
-		while (aimerH.aiming || paused)
-		{
-			if (GameManager.getInput() && !paused && !inputDisabled)
-			{
+		while (aimerH.aiming || paused) {
+			if (GameManager.getInput() && !paused && !inputDisabled) {
 				// stops aiming mode
 				aimerH.aiming = false;
 			}
@@ -108,8 +101,7 @@ public class Aimer : MonoBehaviour {
 		StartCoroutine("AimV");
 	}
 
-	IEnumerator AimV()
-	{
+	IEnumerator AimV() {
 		/*// Tutorial ===============================================//
 		if (GameManager.instance.showTutorial)
 		{

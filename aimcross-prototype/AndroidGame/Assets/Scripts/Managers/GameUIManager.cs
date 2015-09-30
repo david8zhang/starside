@@ -41,10 +41,8 @@ public class GameUIManager : MonoBehaviour {
 		highScoreText.text = "High Score: " + ScoreManager.instance.highScore.ToString();
 	}
 
-	void Update()
-	{
-		if (scoreTextIncrementer < GameManager.instance.score)
-		{
+	void Update() {
+		if (scoreTextIncrementer < GameManager.instance.score) {
 			scoreTextIncrementer ++;
 		}
 
@@ -57,55 +55,45 @@ public class GameUIManager : MonoBehaviour {
 		soundToggle.isOn = !SoundManager.instance.GetComponent<AudioSource>().mute;
 	}
 
-	public void Pause()
-	{
+	public void Pause() {
 		GameManager.instance.paused = true;
 		pauseMenu.gameObject.SetActive (true);
 	}
 
-	public void UnPause()
-	{
+	public void UnPause() {
 		GameManager.instance.paused = false;
 		pauseMenu.gameObject.SetActive (false);
 	}
 
-	public void GameMenu()
-	{
+	public void GameMenu() {
 		gameMenu.gameObject.SetActive(true);
 		gameMenu.GetComponent<Animation>().Play();
 		gameMenuScore.text = "Score:\n" + scoreText.text;
 	}
 
-	public void MainMenu()
-	{
+	public void MainMenu() {
 		Application.LoadLevel("MainMenu");
 	}
 
-	public void Mute(bool set)
-	{
-		if (set == true)
-		{
+	public void Mute(bool set) {
+		if (set == true) {
 			PlayerPrefs.SetInt ("Mute", 0);
 		}
-		else
-		{
+		else {
 			PlayerPrefs.SetInt ("Mute", 1);
 		}
 	}
 
-	public void GPGAchievementsUI()
-	{
+	public void GPGAchievementsUI() {
 		Social.ShowAchievementsUI();
 	}
 
-	public void GPGLeaderboardsUI()
-	{
+	public void GPGLeaderboardsUI() {
 		Social.ShowLeaderboardUI();
 	}
 
 	// Found on "http://forum.unity3d.com/threads/creating-a-share-button-intent-for-android-in-unity-that-forces-the-chooser.335751/"
-	public void Share()
-	{
+	public void Share() {
 		//execute the below lines if being run on a Android device
 		#if UNITY_ANDROID
 
@@ -139,8 +127,7 @@ public class GameUIManager : MonoBehaviour {
 		#endif
 	}
 
-	public void UISound()
-	{
+	public void UISound() {
 		SoundManager.instance.UiSound();
 	}
 }

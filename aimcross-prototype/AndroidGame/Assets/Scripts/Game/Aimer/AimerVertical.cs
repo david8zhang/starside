@@ -37,8 +37,7 @@ public class AimerVertical : MonoBehaviour {
 		}
 	}
 	
-	void CreateAimerPiece(GameObject prefab, int yPos)
-	{
+	void CreateAimerPiece(GameObject prefab, int yPos) {
 		// set the World Position to this instance
 		GameObject o = Instantiate (prefab, this.transform.position, Quaternion.identity) as GameObject;
 		

@@ -11,13 +11,11 @@ public abstract class BoardTile : MonoBehaviour {
 
 	public AudioClip click;
 
-	void Awake()
-	{
+	void Awake() {
 		anim = GetComponent<Animator>();
 	}
 
-	public void animate()
-	{
+	public void animate() {
 		anim.SetTrigger ("Hit");
 		SoundManager.instance.RandomizeSfxBoard(click);
 	}
