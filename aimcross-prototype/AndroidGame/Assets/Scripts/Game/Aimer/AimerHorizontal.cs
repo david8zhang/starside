@@ -96,6 +96,7 @@ public class AimerHorizontal : MonoBehaviour {
 		while(Vector3.Distance (transform.position, destPos) > Mathf.Epsilon &&
 		      counter <= 0.05f) {
 			counter += Time.deltaTime;
+            //Smoothens the transition for when the aimer stops
 			setPosition(Vector3.SmoothDamp(transform.position, destPos, ref velocity, 0.05f));
 			yield return null;
 		}

@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour {
 		while (!getInput () || paused)
 			yield return null;
 
-		yield return new WaitForSeconds(1.0f/60.0f);
+		yield return new WaitForSeconds(1.0f/60.0f); //Stops taps from being registered twice by waiting a frame
 
 		// initialize aiming coroutine
 		aiming = true;
