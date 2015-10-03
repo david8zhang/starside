@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour {
 
     /** Initialization method. */ 
     void Start () {
-        board.initBoard(); //TODO: Create Board initialization method
+        board.InitBoard(); //TODO: Create Board initialization method
         StartCoroutine("CreateElements");
 	}
 
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour {
         board.PopulateBoard();
 
         //Wait for the board to be populated. 
-        while (!board.isPopulated())
+        while (!board.getPopulated())
             yield return null;
 
         //wait for user to start the battle or unpause the game
@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
     
     private IEnumerator ProcessAim(int targetX, int targetY)
     {
-        if(board.hasWeakPoint(targetY, targetX) != null)
+        if(board.getWeakPoint(targetY, targetX) != null)
         {
             aimers[aimerIndex].hitTarget(true);
             BoardTile weakPoint = board.getWeakPoint(targetY, targetX);
@@ -112,11 +112,11 @@ public class GameManager : MonoBehaviour {
 
             //If the board is waiting for the button to process, stop the coroutine
             //from continuing
-            while (board.isWaiting())
+            while (board.getWaiting())
                 yield return null;
 
             //If they destroyed the ship
-            if (board.checkClear())
+            if (board.checkIfBoardClear())
             {
                 //TODO: Add the looting and experience stuff here
                 foreach (Aimer a in aimers)
