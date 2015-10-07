@@ -45,8 +45,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Game\Board.cs" />
-     <Compile Include="Assets\Scripts\Game\BoardTile.cs" />
+     <Compile Include="Assets\Scripts\Game\Aimer\Aimer.cs" />
+     <Compile Include="Assets\Scripts\Game\Board\Board.cs" />
+     <Compile Include="Assets\Scripts\Game\Board\BoardTile.cs" />
      <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

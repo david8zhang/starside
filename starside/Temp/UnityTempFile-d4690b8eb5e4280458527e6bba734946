@@ -76,6 +76,8 @@
 -define:UNITY_EDITOR_64
 -define:UNITY_EDITOR_WIN
 Assets/Scripts/Game/Board.cs
+Assets/Scripts/Game/BoardTile.cs
+Assets/Scripts/Game/NewBehaviourScript.cs
 Assets/Scripts/Manager/GameManager.cs
 -r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Runtime.Serialization.dll"
 -r:"C:\Program Files\Unity\Editor\Data\Mono\lib\mono\unity\System.Xml.Linq.dll"
