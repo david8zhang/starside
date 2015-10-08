@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour {
 
     //Game elements
     private Board board; 
-    private Aimer[] aimers = new Aimer[2];
+    private Aimer aimer;
+	private int aimerIndex; 
 
     // Pre-initialization method
     void Awake () {
@@ -24,8 +25,7 @@ public class GameManager : MonoBehaviour {
         board = GetComponentInChildren<Board>();
 
         //Grab the aimer game objects
-        aimers[0] = transform.FindChild("Aimer1").GetComponent<Aimer>();
-        aimers[1] = transform.FindChild("Aimer2").GetComponent<Aimer>();
+        aimer = transform.FindChild("Aimer").GetComponent<Aimer>();
 	}
 
     void Start()
@@ -37,6 +37,9 @@ public class GameManager : MonoBehaviour {
     //Initializing the board, (and the enemies) 
     IEnumerator Init()
     {
+		//Populate the board
+		board.PopulateBoard ();
+
         while (!board.isPopulated())
         {
             yield return null; 
@@ -56,22 +59,14 @@ public class GameManager : MonoBehaviour {
     IEnumerator Aim()
     {
         float speed = (3.0f * Mathf.Log10(1 + 1.0f) + 3.5f); //Always gives the same constant
-        foreach (Aimer a in aimers)
-            a.setSpeed(speed);
 
-        aimers[aimerIndex].aim();
+        aimer.Aim();
 
         int targetX = -1;
         int targetY = -1; 
 
         while (aiming)
         {
-            if (aimers[aimerIndex].getAimed())
-            {
-                aiming = false;
-                targetX = aimers[aimerIndex].getTargetX();
-                targetY = aimers[aimerIndex].getTargetY();
-            }
             yield return null;
         }
         StartCoroutine(ProcessAim(targetX, targetY));

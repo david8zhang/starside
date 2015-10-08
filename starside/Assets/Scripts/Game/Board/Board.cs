@@ -5,7 +5,7 @@ public class Board : MonoBehaviour {
     
     //Board Attributes
     public bool populated = false; 
-    private const int boardSize = 10;
+    public const int boardSize = 10;
 
     //Actual board itself
     private int[,] boardGen;

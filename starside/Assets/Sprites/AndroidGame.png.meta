@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: d52442c2728902248b46c3117b700f45
-timeCreated: 1444108690
+timeCreated: 1444273194
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -19,6 +19,14 @@ TextureImporter:
     21300024: AndroidGame_12
     21300026: AndroidGame_13
     21300028: AndroidGame_14
+    21300030: AndroidGame_15
+    21300032: AndroidGame_16
+    21300034: AndroidGame_17
+    21300036: AndroidGame_18
+    21300038: AndroidGame_19
+    21300040: AndroidGame_20
+    21300042: AndroidGame_21
+    21300044: AndroidGame_22
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -89,9 +97,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 80
+        y: 113
         width: 16
-        height: 48
+        height: 15
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -99,9 +107,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 48
-        y: 80
+        y: 113
         width: 16
-        height: 48
+        height: 15
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -180,7 +188,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 48
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -190,7 +198,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 48
-        width: 48
+        width: 16
         height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
@@ -212,6 +220,86 @@ TextureImporter:
         y: 83
         width: 8
         height: 7
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_15
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 97
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_16
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_17
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 97
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_18
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 80
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_19
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_20
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_21
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: AndroidGame_22
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
