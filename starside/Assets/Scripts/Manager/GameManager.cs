@@ -63,12 +63,8 @@ public class GameManager : MonoBehaviour {
         aimer.Aim();
 
         int targetX = -1;
-        int targetY = -1; 
-
-        while (aiming)
-        {
-            yield return null;
-        }
+        int targetY = -1;
+        yield return new WaitForSeconds(1.0f / 60.0f);
         StartCoroutine(ProcessAim(targetX, targetY));
     }
     
@@ -76,7 +72,7 @@ public class GameManager : MonoBehaviour {
     IEnumerator ProcessAim(int x, int y)
     {
         Debug.Log("X: " + x + " ," + " Y: " + y);
-        yield return null; 
+        yield return new WaitForSeconds(1.0f / 60.0f);
     }
 
     //Getting user touch/click input
