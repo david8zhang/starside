@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour {
 		while (!getInput () || paused)
 			yield return null;
 
-		yield return new WaitForSeconds(1.0f/60.0f);
+		yield return new WaitForSeconds(1.0f/60.0f); //Stops taps from being registered twice by waiting a frame
 
 		// initialize aiming coroutine
 		aiming = true;
@@ -229,6 +229,7 @@ public class GameManager : MonoBehaviour {
 	public static bool getInput()
 	{
 		float yBorder = (Camera.main.orthographicSize * 2) * (3.0f / 4.0f) - 3.5f;
+		print ("clicked");
 //#if UNITY_EDITOR
 		return (Input.GetMouseButtonDown(0) && 
 			Camera.main.ScreenToWorldPoint(Input.mousePosition).y < yBorder);
