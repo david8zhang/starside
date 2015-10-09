@@ -81,4 +81,31 @@ public class AimerHorizontal : MonoBehaviour {
         transform.position = pos;
         aimerC.setY(this.transform.position.y + offsetY);
     }
+
+    public void snap()
+    {
+        counter = Mathf.Round(counter);
+        float yPos = Mathf.Round(transform.position.y);
+        targetY = yPos;
+        StartCoroutine("smoothSnap");
+    }
+
+    IEnumerator smoothSnap()
+    {
+        Vector3 destPos = new Vector3(Mathf.Round(transform.position.x) - offsetX,
+                                      Mathf.Round(transform.position.y));
+        Vector3 velocity = Vector3.zero;
+
+        float counter = 0.0f; 
+        while(Vector3.Distance(transform.position, destPos) > Mathf.Epsilon &&
+            counter <= 0.05f)
+        {
+            counter += Time.deltaTime;
+            //Smoothens the transition for when the aimer stops
+            setPosition(Vector3.SmoothDamp(transform.position, destPos, ref velocity, 0.05f));
+            yield return null;
+        }
+        setPosition(destPos);
+        yield return null; 
+    }
 }

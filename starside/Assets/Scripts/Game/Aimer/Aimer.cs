@@ -69,6 +69,7 @@ public class Aimer : MonoBehaviour {
         }
 
 		yield return new WaitForSeconds (1.0f / 60.0f);
+        aimerH.snap();
         StartCoroutine("AimV");
 	}
 
@@ -86,6 +87,8 @@ public class Aimer : MonoBehaviour {
             yield return null;
         }
         yield return new WaitForSeconds(1.0f / 60.0f);
+
+        aimerV.snap(); 
 
         aimed = true; 
 	}
