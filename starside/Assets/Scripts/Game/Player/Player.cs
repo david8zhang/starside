@@ -21,6 +21,8 @@ public class Player : MonoBehaviour {
     private int totalEXP; 
     /** Player's in-game level */
     private int level;
+    /** Attributes that the player has without any power-ups */
+    private Dictionary<string, int> attributes;
     /** Power-ups that the player currently has and can use in battles. */
     private List<Powerup> upgrades;
     
@@ -33,8 +35,13 @@ public class Player : MonoBehaviour {
     public void setHP(int newHP) {
         HP = newHP;
     }
+    /** Player takes hit and decreases based on given damage
+     *  @param damage: damage that the player takes */
+    public void takeHit(int damage) {
+        HP -= (damage - defense);
+    }
     /** Returns the player's defense stat */
-    public int defense() {
+    public int getDefense() {
         return defense;
     }
     /** Sets the player's defense stat
@@ -74,6 +81,21 @@ public class Player : MonoBehaviour {
     public void setLevel(int newLevel) {
         level = newLevel;
     }
+
+    /** Checks to see if the player's EXP is over the total
+     *  for a level up */
+    public boolean isLeveling() {
+        return EXP >= totalEXP;
+    }
+    /** Executes a level up
+     *  TODO increases stats in some way, adjust in attributes list */
+    public void levelUP() {
+        level += 1;
+        this.setEXP(level);
+    }
+
+    /** Refreshes the stats after a battle, in case a power up is used */
+
 }
     
 
