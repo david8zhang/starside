@@ -12,4 +12,15 @@ public class AimerCenter : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    //Set position methods
+    public void setX(float x)
+    {
+        transform.position = new Vector3(x, transform.position.y);
+    }
+
+    public void setY(float y)
+    {
+        transform.position = new Vector3(transform.position.x, y);
+    }
 }

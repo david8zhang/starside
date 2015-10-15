@@ -13,6 +13,9 @@ public class AimerHorizontal : MonoBehaviour {
 	public bool aiming;		// whether this aimer bar is aiming
 	public bool paused;
 	public float speed;		// speed of the aimer (higher = faster)
+
+    public float offsetX = .3f;
+    public float offsetY = 1.01f; 
 	
 	// prefabs for left, middle, and right sprites
 	public GameObject prefabLeft;
@@ -21,8 +24,8 @@ public class AimerHorizontal : MonoBehaviour {
 	
 	// The y coordinate after this aimer has finished aiming
 	public float targetY;
-	
-	/* Custom timer for Mathf.PingPong when the aimer is aiming
+
+    /* Custom timer for Mathf.PingPong when the aimer is aiming
 	 * Counter will stop when the aimer stops, thus conserving the
 	 * position of the aimer so when it calls Mathf.PingPong again,
 	 * it will continue from its current position
@@ -30,7 +33,10 @@ public class AimerHorizontal : MonoBehaviour {
 	 * This is needed because Mathf.PingPong is a simple function
 	 * */
 
-	void Awake(){
+    private float counter = 0.0f;
+
+
+    void Awake(){
 		// Create the sprites that make up the bar
 		boardSize = Board.boardSize;
 		//Create the outer aimer pieces
@@ -47,7 +53,7 @@ public class AimerHorizontal : MonoBehaviour {
 		GameObject o = Instantiate (prefab, this.transform.position, Quaternion.identity) as GameObject;
 		
 		// set the Local Position to the xPos specified
-		Vector3 localPos = new Vector3(xPos, 0, 0);
+		Vector3 localPos = new Vector3(xPos + offsetX, 0 + offsetY, 0);
 		
 		// set this to be the object's parent and set local position
 		o.transform.SetParent(this.transform);
@@ -61,6 +67,45 @@ public class AimerHorizontal : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (aiming && !paused)
+        {
+            counter += speed * Time.deltaTime;
+            float yPos = Mathf.PingPong(counter, (boardSize - 1)) - offsetY;
+            setPosition(new Vector3(transform.position.x, yPos));
+        }
+    }
+
+    //Sets the position of the center piece
+    void setPosition(Vector3 pos)
+    {
+        transform.position = pos;
+        aimerC.setY(this.transform.position.y + offsetY);
+    }
+
+    public void snap()
+    {
+        counter = Mathf.Round(counter);
+        float yPos = Mathf.Round(transform.position.y);
+        targetY = yPos;
+        StartCoroutine("smoothSnap");
+    }
+
+    IEnumerator smoothSnap()
+    {
+        Vector3 destPos = new Vector3(Mathf.Round(transform.position.x) - offsetX,
+                                      Mathf.Round(transform.position.y));
+        Vector3 velocity = Vector3.zero;
+
+        float counter = 0.0f; 
+        while(Vector3.Distance(transform.position, destPos) > Mathf.Epsilon &&
+            counter <= 0.05f)
+        {
+            counter += Time.deltaTime;
+            //Smoothens the transition for when the aimer stops
+            setPosition(Vector3.SmoothDamp(transform.position, destPos, ref velocity, 0.05f));
+            yield return null;
+        }
+        setPosition(destPos);
+        yield return null; 
+    }
 }

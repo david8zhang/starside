@@ -15,6 +15,9 @@ public class AimerVertical : MonoBehaviour {
 	public GameObject prefabTop;
 	public GameObject prefabMid;
 	public GameObject prefabBottom;
+
+    public float offsetX;
+    public float offsetY;
 	
 	// The x coordinate after this aimer has stopped
 	public float targetX;
@@ -40,7 +43,7 @@ public class AimerVertical : MonoBehaviour {
 		GameObject o = Instantiate (prefab, this.transform.position, Quaternion.identity) as GameObject;
 		
 		// set the Local Position to the xPos specified
-		Vector3 localPos = new Vector3(0, yPos, 0);
+		Vector3 localPos = new Vector3(0 + offsetX, yPos + offsetY, 0);
 		
 		// set this to be the object's parent and set local position
 		o.transform.SetParent(this.transform);
@@ -54,6 +57,48 @@ public class AimerVertical : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        if(aiming  && !paused)
+        {
+            counter += speed * Time.deltaTime;
+            float xPos = Mathf.PingPong(counter, boardSize - 1) - offsetX;
+            setPosition(new Vector3(xPos, transform.position.y));
+        }
+
 	}
+
+    //Sets the position of the center piece
+    void setPosition(Vector3 pos)
+    {
+        transform.position = pos;
+        aimerC.setX(this.transform.position.x + offsetX);
+    }
+
+    //Snap to the position
+    public void snap()
+    {
+        counter = Mathf.Round(counter);
+        float xPos = Mathf.Round(transform.position.x);
+        targetX = xPos;
+
+        StartCoroutine("smoothSnap");
+    }
+
+    IEnumerator smoothSnap()
+    {
+        Vector3 destPos = new Vector3(Mathf.Round(transform.position.x) - offsetX,
+                                      Mathf.Round(transform.position.y));
+        Vector3 velocity = Vector3.zero;
+
+        float counter = 0.0f;
+        while (Vector3.Distance(transform.position, destPos) > Mathf.Epsilon &&
+            counter <= 0.05f)
+        {
+            counter += Time.deltaTime;
+            //Smoothens the transition for when the aimer stops
+            setPosition(Vector3.SmoothDamp(transform.position, destPos, ref velocity, 0.05f));
+            yield return null;
+        }
+        setPosition(destPos);
+        yield return null;
+    }
 }

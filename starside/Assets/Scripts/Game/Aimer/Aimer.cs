@@ -35,7 +35,8 @@ public class Aimer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        aimerH.aimerC = aimerC; //initialize center crosshair
+        aimerV.aimerC = aimerC; 
 	}
 	
 	// Update is called once per frame
@@ -48,12 +49,47 @@ public class Aimer : MonoBehaviour {
 	}
 
 	IEnumerator AimH() {
+        aimerH.speed = aimerSpeed;
+        aimerV.speed = aimerSpeed;
+
+        //Set aimerH active and to aiming mode
+        aimerH.gameObject.SetActive(true);
+        aimerH.aiming = true; 
+
 		print ("started aiming horiz"); 
+
+        while(aimerH.aiming)
+        {
+            if(GameManager.getInput())
+            {
+                print("stopped!");
+                aimerH.aiming = false; 
+            }
+            yield return null; 
+        }
+
 		yield return new WaitForSeconds (1.0f / 60.0f);
+        aimerH.snap();
+        StartCoroutine("AimV");
 	}
 
 	IEnumerator AimV(){
-		print ("started aiming vert");
-		yield return null;
+        aimerV.gameObject.SetActive(true);
+        aimerC.GetComponent<SpriteRenderer>().enabled = true;
+
+        aimerV.aiming = true; 
+        while(aimerV.aiming || paused)
+        {
+            if(GameManager.getInput() && !paused && !inputDisabled)
+            {
+                aimerV.aiming = false; 
+            }
+            yield return null;
+        }
+        yield return new WaitForSeconds(1.0f / 60.0f);
+
+        aimerV.snap(); 
+
+        aimed = true; 
 	}
 }
