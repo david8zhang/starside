@@ -3,15 +3,11 @@ using System.Collections;
 
 public class BoardTile : MonoBehaviour {
 
-    private Board board;
+    public Board board;
     protected Animator anim;
 
-    private int pointValue;
+    public int pointValue;
 
-    public Board getBoard() { return board; }
-    public void setBoard(Board newBoard) { board = newBoard; }
-    public int getPoint() { return pointValue; }
-    public void setPoint(int newPoint) { pointValue = newPoint; }
 
     void Awake()
     {

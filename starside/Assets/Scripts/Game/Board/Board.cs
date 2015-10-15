@@ -69,7 +69,7 @@ public class Board : MonoBehaviour {
     {
         GameObject o = Instantiate(prefab, new Vector3(x, y), Quaternion.identity) as GameObject;
         o.transform.SetParent(this.transform);
-        o.GetComponent<BoardTile>().setBoard(this);
+        o.GetComponent<BoardTile>().board = this;
         return o;
     }
 }
