@@ -95,7 +95,9 @@ public class Player : MonoBehaviour {
     }
 
     /** Refreshes the stats after a battle, in case a power up is used */
-
+    public void refresh() {
+        HP = attributes.tryGetValue("HP");
+        
 }
     
 
