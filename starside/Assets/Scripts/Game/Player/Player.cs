@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 /**
  * Class containing player attributes and anything
@@ -84,7 +85,7 @@ public class Player : MonoBehaviour {
 
     /** Checks to see if the player's EXP is over the total
      *  for a level up */
-    public boolean isLeveling() {
+    public bool isLeveling() {
         return EXP >= totalEXP;
     }
     /** Executes a level up
@@ -95,14 +96,8 @@ public class Player : MonoBehaviour {
     }
 
     /** Refreshes the stats after a battle, in case a power up is used */
-    public void refresh() {
-        HP = attributes.tryGetValue("HP");
-        
+    public void refresh()
+    {
+        //HP = attributes.tryGetValue("HP");
+    }
 }
-    
-
-
-    
-
-
-    

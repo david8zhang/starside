@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Board : MonoBehaviour {
     
@@ -13,9 +14,15 @@ public class Board : MonoBehaviour {
 
     //Prefab objects
     public GameObject tilePrefab;
-        
-    //Use this for pre-initialization
-    void Awake()
+    public GameObject enemyTile; 
+
+    //Enemy attributes
+    private int enemRangeX = 3;
+    private int enemRangeY = 2;
+    private int numEnemies; 
+
+    //Use this for preinitialization
+    public void Awake()
     {
         //Initalize the gridOutline
         gridOutline = new BoardTile[boardSize, boardSize];
@@ -25,11 +32,45 @@ public class Board : MonoBehaviour {
     //Initalize the board
     public void InitBoard()
     {
-        for(int i = 0; i < boardSize; i++)
+        int enemPosX = UnityEngine.Random.Range(0, 5);
+        int enemPosY = UnityEngine.Random.Range(0, 5);
+        int enemCount = 0; 
+        for (int i = 0; i < boardSize; i++)
         {
-            for(int j = 0; j < boardSize; j++)
+            for (int j = 0; j < boardSize; j++)
             {
-                gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
+                if (enemCount < numEnemies)
+                {
+                    if (i == enemPosX && j == enemPosY)
+                    {
+                        genEnemy(i, j, i + enemRangeX, j + enemRangeY);
+                        int newPosX = UnityEngine.Random.Range(5, 10 - enemRangeX);
+                        int newPosY = UnityEngine.Random.Range(5, 10 - enemRangeY);
+                        enemPosX = newPosX;
+                        enemPosY = newPosY; 
+                        enemCount++; 
+                    }
+                    else
+                    {
+                        gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
+                    }
+                }
+
+                else
+                {
+                    gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
+                }
+            }
+        }
+    }
+
+    public void genEnemy(int startx, int starty, int endx, int endy)
+    {
+        for(int i = startx; i < endx; i++)
+        {
+            for(int j = starty; j < endy; j++)
+            {
+                gridOutline[j, i] = CreateNewTile(enemyTile, i, j).GetComponent<BoardTile>() as EnemyTile;
             }
         }
     }
@@ -53,17 +94,6 @@ public class Board : MonoBehaviour {
     {
         return populated; 
     }
-	
-    // Use this for initialization
-	void Start () {
-
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public GameObject CreateNewTile(GameObject prefab, int x, int y)
     {
@@ -71,5 +101,10 @@ public class Board : MonoBehaviour {
         o.transform.SetParent(this.transform);
         o.GetComponent<BoardTile>().board = this;
         return o;
+    }
+
+    public void setEnemies(int numEnemies)
+    {
+        this.numEnemies = numEnemies; 
     }
 }

@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
+        board.setEnemies(2);
         board.InitBoard();
         StartCoroutine("Init");
     }
