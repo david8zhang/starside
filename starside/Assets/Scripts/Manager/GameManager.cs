@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        board.setEnemies(2);
+        board.setEnemies(2); //Hard coded
+        board.setEnemyRange(4, 3); //Hard Coded
         board.InitBoard();
         StartCoroutine("Init");
     }
@@ -38,9 +39,6 @@ public class GameManager : MonoBehaviour {
     //Initializing the board, (and the enemies) 
     IEnumerator Init()
     {
-		//Populate the board
-		board.PopulateBoard ();
-
         while (!board.isPopulated())
         {
             yield return null; 
@@ -69,7 +67,9 @@ public class GameManager : MonoBehaviour {
         {
             if (aimer.getAimed())
             {
-                aiming = false; 
+                aiming = false;
+                targetX = aimer.getTargetX();
+                targetY = aimer.getTargetY();
             }
             yield return null;
         }
@@ -80,8 +80,12 @@ public class GameManager : MonoBehaviour {
     //Process the aimed down location
     IEnumerator ProcessAim(int x, int y)
     {
-        Debug.Log("X: " + x + " ," + " Y: " + y);
-        yield return new WaitForSeconds(1.0f / 60.0f);
+        if(board.getBoardCodes()[y, x] > 0)
+        {
+            print("X: " + x + "," + "Y: " + y);
+            print("Hit Enemy!");
+        }
+        yield return new WaitForSeconds(10.0f / 60.0f);
         aiming = true;
         StartCoroutine("Aim");
     }

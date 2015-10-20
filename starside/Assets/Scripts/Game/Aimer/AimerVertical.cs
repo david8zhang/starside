@@ -20,7 +20,7 @@ public class AimerVertical : MonoBehaviour {
     public float offsetY;
 	
 	// The x coordinate after this aimer has stopped
-	public float targetX;
+	private float targetX;
 	
 	private float counter = 0.0f;
 
@@ -79,7 +79,7 @@ public class AimerVertical : MonoBehaviour {
         counter = Mathf.Round(counter);
         float xPos = Mathf.Round(transform.position.x);
         targetX = xPos;
-
+        print(targetX);
         StartCoroutine("smoothSnap");
     }
 
@@ -100,5 +100,15 @@ public class AimerVertical : MonoBehaviour {
         }
         setPosition(destPos);
         yield return null;
+    }
+
+    public float getTargetX()
+    {
+        return targetX;
+    }
+
+    public void setTargetX(float newTarget)
+    {
+        targetX = newTarget; 
     }
 }

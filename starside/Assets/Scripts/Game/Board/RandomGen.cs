@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 
-public class Board : MonoBehaviour {
+public class RandomGen : MonoBehaviour {
     
     //Board Attributes
     public bool populated = false; 
@@ -88,8 +88,8 @@ public class Board : MonoBehaviour {
 		//you can change these up as much as you want as long as those 2 requirements are met nothing should break
 		int partitionWidth = maxWidth+2;
 		int partitionHeight = maxHeight+2;
-		int validPartitionsX = boardWidth/partitionWidth; //The number of full partition widths that could fit
-		int validPartitionsY = boardHeight/partitionHeight; //The number of full partition heights that could fit
+		int validPartitionsX = boardSize/partitionWidth; //The number of full partition widths that could fit
+		int validPartitionsY = boardSize/partitionHeight; //The number of full partition heights that could fit
 		bool[,] takenSpots= new bool[validPartitionsX,validPartitionsY];//values that are already taken
 		//Note im assuming that takenSpots is all initialized to FALSE in c#
 		//Also note that this loop will infinite loop if you have more ships than partition spots!!!!
@@ -101,12 +101,12 @@ public class Board : MonoBehaviour {
 				currY = UnityEngine.Random.Range(0, validPartitionsY);			
 			}while(takenSpots[currX,currY]);
 			if(currX==validPartitionsX-1){//Edge case if partitions dont fit perfectly into board, give extra tiles to right side and bottom row
-				enemyList[x,2]=currX*partitionWidth+pickSpot(0,partitionWidth+boardWidth%partitionWidth,enemyList[x,0]);			
+				enemyList[x,2]=currX*partitionWidth+pickSpot(0,partitionWidth+boardSize%partitionWidth,enemyList[x,0]);			
 			}else{
 				enemyList[x,2]=currX*partitionWidth+pickSpot(0,partitionWidth,enemyList[x,0]);			
 			}
 			if(currY==validPartitionsY-1){//Edge case if partitions dont fit perfectly into board, give extra tiles to right side and bottom row
-				enemyList[x,3]=currY*partitionHeight+pickSpot(0,partitionHeight+boardHeight%partitionHeight,enemyList[x,1]);				
+				enemyList[x,3]=currY*partitionHeight+pickSpot(0,partitionHeight+boardSize%partitionHeight,enemyList[x,1]);				
 			}else{
 				enemyList[x,3]=currY*partitionHeight+pickSpot(0,partitionHeight,enemyList[x,1]);			
 			}
@@ -155,7 +155,7 @@ public class Board : MonoBehaviour {
     {
         GameObject o = Instantiate(prefab, new Vector3(x, y), Quaternion.identity) as GameObject;
         o.transform.SetParent(this.transform);
-        o.GetComponent<BoardTile>().board = this;
+        o.GetComponent<BoardTile>().randomGen = this;
         return o;
     }
 

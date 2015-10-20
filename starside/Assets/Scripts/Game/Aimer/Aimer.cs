@@ -55,14 +55,10 @@ public class Aimer : MonoBehaviour {
         //Set aimerH active and to aiming mode
         aimerH.gameObject.SetActive(true);
         aimerH.aiming = true; 
-
-		print ("started aiming horiz"); 
-
         while(aimerH.aiming)
         {
             if(GameManager.getInput())
             {
-                print("stopped!");
                 aimerH.aiming = false; 
             }
             yield return null; 
@@ -88,7 +84,11 @@ public class Aimer : MonoBehaviour {
         }
         yield return new WaitForSeconds(1.0f / 60.0f);
 
-        aimerV.snap(); 
+        aimerV.snap();
+
+        targetY = (int)aimerH.getTargetY();
+        targetX = (int)aimerV.getTargetX();
+        print(targetY + "," + targetX);
 
         aimed = true; 
 	}

@@ -4,6 +4,7 @@ using System.Collections;
 public class BoardTile : MonoBehaviour {
 
     public Board board;
+    public RandomGen randomGen;
     protected Animator anim;
 
     public int pointValue;

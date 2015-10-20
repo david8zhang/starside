@@ -23,7 +23,7 @@ public class AimerHorizontal : MonoBehaviour {
 	public GameObject prefabRight;
 	
 	// The y coordinate after this aimer has finished aiming
-	public float targetY;
+	private float targetY;
 
     /* Custom timer for Mathf.PingPong when the aimer is aiming
 	 * Counter will stop when the aimer stops, thus conserving the
@@ -86,7 +86,8 @@ public class AimerHorizontal : MonoBehaviour {
     {
         counter = Mathf.Round(counter);
         float yPos = Mathf.Round(transform.position.y);
-        targetY = yPos;
+        targetY = yPos + 1;
+        print(targetY);
         StartCoroutine("smoothSnap");
     }
 
@@ -107,5 +108,15 @@ public class AimerHorizontal : MonoBehaviour {
         }
         setPosition(destPos);
         yield return null; 
+    }
+
+    public float getTargetY()
+    {
+        return targetY;
+    }
+
+    public void setTargetY(float newTarget)
+    {
+        targetY = newTarget;
     }
 }
