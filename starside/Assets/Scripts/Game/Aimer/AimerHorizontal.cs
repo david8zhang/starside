@@ -87,7 +87,6 @@ public class AimerHorizontal : MonoBehaviour {
         counter = Mathf.Round(counter);
         float yPos = Mathf.Round(transform.position.y);
         targetY = yPos + 1;
-        print(targetY);
         StartCoroutine("smoothSnap");
     }
 

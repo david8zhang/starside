@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
@@ -12,10 +13,11 @@ public class GameManager : MonoBehaviour {
     //Game elements
     private Board board; 
     private Aimer aimer;
-	private int aimerIndex; 
+	private int aimerIndex;
+    private Player player;
 
     // Pre-initialization method
-    void Awake () {
+    void Awake() {
         if (instance == null)
             instance = this;
         else if (instance != this)
@@ -26,7 +28,12 @@ public class GameManager : MonoBehaviour {
 
         //Grab the aimer game objects
         aimer = transform.FindChild("Aimer").GetComponent<Aimer>();
-	}
+
+        //Set the player
+        player = transform.FindChild("Player").GetComponent<Player>();
+        player.setHP(10);
+        player.setAttack(10);
+    }
 
     void Start()
     {
@@ -80,10 +87,26 @@ public class GameManager : MonoBehaviour {
     //Process the aimed down location
     IEnumerator ProcessAim(int x, int y)
     {
-        if(board.getBoardCodes()[y, x] > 0)
+        if (board.getBoardCodes()[y, x] > 0)
         {
-            print("X: " + x + "," + "Y: " + y);
-            print("Hit Enemy!");
+            int enemycode = board.getBoardCodes()[y, x];
+            Enemy e = board.getEnemy(enemycode);
+            e.takeHit(player.getAttack());
+            print("Enemy " + e.getCode() + " Health: " + e.getHealth());
+            if (e.getDead())
+            {
+                board.removeEnemy(e);
+                board.updateBoard(e.getCode());
+            }
+        }
+        else
+        {
+            List<Enemy> enemies = board.getEnemies(); 
+            foreach(Enemy e in enemies)
+            {
+                e.attackPlayer(player);
+                print("Player Health: " + player.getHP());
+            }
         }
         yield return new WaitForSeconds(10.0f / 60.0f);
         aiming = true;

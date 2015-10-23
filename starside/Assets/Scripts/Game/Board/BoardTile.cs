@@ -20,6 +20,12 @@ public class BoardTile : MonoBehaviour {
         anim.SetTrigger("Hit");
     }
 
+    public void deactivate()
+    {
+        print("Deactivated");
+        gameObject.SetActive(false);
+    }
+
 	// Use this for initialization
 	void Start () {
 	

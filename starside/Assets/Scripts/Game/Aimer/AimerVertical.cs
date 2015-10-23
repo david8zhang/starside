@@ -79,7 +79,6 @@ public class AimerVertical : MonoBehaviour {
         counter = Mathf.Round(counter);
         float xPos = Mathf.Round(transform.position.x);
         targetX = xPos;
-        print(targetX);
         StartCoroutine("smoothSnap");
     }
 

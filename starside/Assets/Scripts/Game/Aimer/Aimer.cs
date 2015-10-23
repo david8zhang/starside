@@ -88,8 +88,6 @@ public class Aimer : MonoBehaviour {
 
         targetY = (int)aimerH.getTargetY();
         targetX = (int)aimerV.getTargetX();
-        print(targetY + "," + targetX);
-
         aimed = true; 
 	}
 }
