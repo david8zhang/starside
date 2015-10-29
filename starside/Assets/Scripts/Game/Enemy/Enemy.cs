@@ -11,6 +11,12 @@ public class Enemy : MonoBehaviour
     private int health;
     private bool isDead; 
 
+	public void Awake(){
+		damage = 10;
+		health = 20;
+		isDead = false;
+	}
+
     /// <summary>
     /// Attack the player PLAYER
     /// </summary>
