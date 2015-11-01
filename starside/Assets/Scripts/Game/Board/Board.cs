@@ -53,15 +53,12 @@ public class Board : MonoBehaviour {
                         enemPosY = 6;
                         enemCount++;
                     }
-                    else
-                    {
-                        gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
-                    }
+//                    gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
                 }
 
                 else
                 { 
-                    gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
+                   // gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
                 }
             }
         }
@@ -79,7 +76,7 @@ public class Board : MonoBehaviour {
                     print(j + "," + i + boardCodes[j, i]);
                     boardCodes[j, i] = 0;
                     enemyOutline[j, i].deactivate();
-                    gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
+//                    gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
                 }
             }
         }
@@ -105,7 +102,7 @@ public class Board : MonoBehaviour {
         Enemy e = o.GetComponent<Enemy>();
         e.setCode(enemyCode);
         e.setHealth(2 * (enemRangeX * enemRangeY));
-        e.setDamage(enemRangeX);
+        e.setDamage(25);
         enemyList.Add(e);
     }
 
@@ -147,6 +144,7 @@ public class Board : MonoBehaviour {
     {
         GameObject o = Instantiate(prefab, new Vector3(x, y), Quaternion.identity) as GameObject;
         o.transform.SetParent(this.transform);
+        o.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, .5f);
         o.GetComponent<BoardTile>().board = this;
         return o;
     }

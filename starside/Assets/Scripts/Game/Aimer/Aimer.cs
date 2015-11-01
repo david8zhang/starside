@@ -72,6 +72,7 @@ public class Aimer : MonoBehaviour {
 	IEnumerator AimV(){
         aimerV.gameObject.SetActive(true);
         aimerC.GetComponent<SpriteRenderer>().enabled = true;
+        aimerC.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.5f);
 
         aimerV.aiming = true; 
         while(aimerV.aiming || paused)

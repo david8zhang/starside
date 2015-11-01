@@ -6,10 +6,13 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Author: David Zhang
     /// </summary>
-    private int damage;
-    private int enemyCode;
+    public int damage;
+    public int enemyCode;
     private int health;
-    private bool isDead; 
+    private bool isDead = false; 
+
+	public void Awake(){
+	}
 
     /// <summary>
     /// Attack the player PLAYER
@@ -17,6 +20,7 @@ public class Enemy : MonoBehaviour
     /// <param name="player"></param>
     public void attackPlayer(Player player)
     {
+        print("Enemy " + enemyCode + " attacked player!");
         player.takeHit(damage);
     }
 

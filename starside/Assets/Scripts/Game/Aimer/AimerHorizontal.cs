@@ -50,8 +50,7 @@ public class AimerHorizontal : MonoBehaviour {
 
 	void CreateAimerPiece(GameObject prefab, int xPos) {
 		// set the World Position to this instance
-		GameObject o = Instantiate (prefab, this.transform.position, Quaternion.identity) as GameObject;
-		
+		GameObject o = Instantiate (prefab, this.transform.position, Quaternion.identity) as GameObject;		
 		// set the Local Position to the xPos specified
 		Vector3 localPos = new Vector3(xPos + offsetX, 0 + offsetY, 0);
 		

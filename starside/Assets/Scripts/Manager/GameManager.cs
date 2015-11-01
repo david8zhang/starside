@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour {
     //Game elements
     private Board board; 
     private Aimer aimer;
-	private int aimerIndex;
-    private Player player;
+	public Player player;
+	private int aimerIndex; 
 
     // Pre-initialization method
     void Awake() {
@@ -26,13 +26,15 @@ public class GameManager : MonoBehaviour {
         //Initialize the board
         board = GetComponentInChildren<Board>();
 
+		//Initialize player
+		player = transform.FindChild ("Player").GetComponent<Player> ();
+
         //Grab the aimer game objects
         aimer = transform.FindChild("Aimer").GetComponent<Aimer>();
 
         //Set the player
         player = transform.FindChild("Player").GetComponent<Player>();
-        player.setHP(10);
-        player.setAttack(10);
+		player.setAttack(10);
     }
 
     void Start()
@@ -67,7 +69,6 @@ public class GameManager : MonoBehaviour {
         float speed = (3.0f * Mathf.Log10(1 + 1.0f) + 3.5f); //Always gives the same constant
 
         aimer.Aim();
-
         int targetX = -1;
         int targetY = -1;
         while (aiming)
@@ -105,7 +106,7 @@ public class GameManager : MonoBehaviour {
             foreach(Enemy e in enemies)
             {
                 e.attackPlayer(player);
-                print("Player Health: " + player.getHP());
+                print("Player Health: " + player.getCurrHP());
             }
         }
         yield return new WaitForSeconds(10.0f / 60.0f);
@@ -123,6 +124,5 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 }
