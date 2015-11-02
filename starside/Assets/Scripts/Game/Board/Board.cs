@@ -98,7 +98,9 @@ public class Board : MonoBehaviour {
                 enemyOutline[j, i] = CreateNewTile(enemyTile, i, j).GetComponent<EnemyTile>() as EnemyTile;
             }
         }
-        GameObject o = Instantiate(enemyPrefab, transform.position, Quaternion.identity) as GameObject;
+        float xPos = (startx - 0.9f + endx) / 2;
+        float yPos = (starty + endy) / 2; 
+        GameObject o = Instantiate(enemyPrefab, new Vector3(xPos, yPos), Quaternion.identity) as GameObject;
         Enemy e = o.GetComponent<Enemy>();
         e.setCode(enemyCode);
         e.setHealth(2 * (enemRangeX * enemRangeY));
