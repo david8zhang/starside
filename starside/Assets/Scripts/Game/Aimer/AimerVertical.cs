@@ -70,44 +70,6 @@ public class AimerVertical : MonoBehaviour {
     void setPosition(Vector3 pos)
     {
         transform.position = pos;
-        aimerC.setX(this.transform.position.x + offsetX);
-    }
-
-    //Snap to the position
-    public void snap()
-    {
-        counter = Mathf.Round(counter);
-        float xPos = Mathf.Round(transform.position.x);
-        targetX = xPos;
-        StartCoroutine("smoothSnap");
-    }
-
-    IEnumerator smoothSnap()
-    {
-        Vector3 destPos = new Vector3(Mathf.Round(transform.position.x) - offsetX,
-                                      Mathf.Round(transform.position.y));
-        Vector3 velocity = Vector3.zero;
-
-        float counter = 0.0f;
-        while (Vector3.Distance(transform.position, destPos) > Mathf.Epsilon &&
-            counter <= 0.05f)
-        {
-            counter += Time.deltaTime;
-            //Smoothens the transition for when the aimer stops
-            setPosition(Vector3.SmoothDamp(transform.position, destPos, ref velocity, 0.05f));
-            yield return null;
-        }
-        setPosition(destPos);
-        yield return null;
-    }
-
-    public float getTargetX()
-    {
-        return targetX;
-    }
-
-    public void setTargetX(float newTarget)
-    {
-        targetX = newTarget; 
+        aimerC.setX(transform.position.x + offsetX);
     }
 }

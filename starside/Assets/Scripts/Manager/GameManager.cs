@@ -66,52 +66,56 @@ public class GameManager : MonoBehaviour {
     //Allowing user to aim the crosshairs
     IEnumerator Aim()
     {
+
         float speed = (3.0f * Mathf.Log10(1 + 1.0f) + 3.5f); //Always gives the same constant
 
         aimer.Aim();
-        int targetX = -1;
-        int targetY = -1;
+        Enemy e = null; 
+        bool hit = false;
         while (aiming)
         {
             if (aimer.getAimed())
             {
                 aiming = false;
-                targetX = aimer.getTargetX();
-                targetY = aimer.getTargetY();
+                hit = aimer.CheckHit();
+                e = aimer.GetHitEnemy();
             }
             yield return null;
         }
         aimer.setAimed(false);
-        StartCoroutine(ProcessAim(targetX, targetY));
+        StartCoroutine(ProcessAim(hit, e));
     }
     
     //Process the aimed down location
-    IEnumerator ProcessAim(int x, int y)
+    IEnumerator ProcessAim(bool hit, Enemy e)
     {
-        if (board.getBoardCodes()[y, x] > 0)
+        if (hit)
         {
-            int enemycode = board.getBoardCodes()[y, x];
-            Enemy e = board.getEnemy(enemycode);
             e.takeHit(player.getAttack());
             print("Enemy " + e.getCode() + " Health: " + e.getHealth());
             if (e.getDead())
             {
                 board.removeEnemy(e);
-                board.updateBoard(e.getCode());
             }
         }
         else
         {
             List<Enemy> enemies = board.getEnemies(); 
-            foreach(Enemy e in enemies)
+            foreach(Enemy enem in enemies)
             {
-                e.attackPlayer(player);
+                enem.attackPlayer(player);
                 print("Player Health: " + player.getCurrHP());
             }
         }
         yield return new WaitForSeconds(10.0f / 60.0f);
         aiming = true;
-        StartCoroutine("Aim");
+        if (board.getEnemies().Count == 0)
+        {
+            Application.LoadLevel("GameOver");
+        } else
+        {
+            StartCoroutine("Aim");
+        }
     }
 
     //Getting user touch/click input
@@ -124,5 +128,6 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
 	}
 }

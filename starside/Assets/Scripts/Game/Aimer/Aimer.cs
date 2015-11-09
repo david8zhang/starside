@@ -26,12 +26,6 @@ public class Aimer : MonoBehaviour {
 	
 	public void setAimed(bool newAim){ aimed = newAim; } 
 	public bool getAimed() { return aimed; }
-	
-	public void setTargetX(int newX){ targetX = newX; }
-	public int getTargetX(){ return targetX; }
-	
-	public void setTargetY(int newY){ targetY = newY; }
-	public int getTargetY(){ return targetY; } 
 
 	// Use this for initialization
 	void Start () {
@@ -65,7 +59,6 @@ public class Aimer : MonoBehaviour {
         }
 
 		yield return new WaitForSeconds (1.0f / 60.0f);
-        aimerH.snap();
         StartCoroutine("AimV");
 	}
 
@@ -84,11 +77,26 @@ public class Aimer : MonoBehaviour {
             yield return null;
         }
         yield return new WaitForSeconds(1.0f / 60.0f);
-
-        aimerV.snap();
-
-        targetY = (int)aimerH.getTargetY();
-        targetX = (int)aimerV.getTargetX();
         aimed = true; 
 	}
+
+    /// <summary>
+    /// Returns whether or not the enemy has been hit
+    /// </summary>
+    /// <returns></returns>
+    public bool CheckHit()
+    {
+        AimerCenter gobj = gameObject.transform.Find("AimerC").GetComponent<AimerCenter>();
+        return gobj.OnHit();
+    }
+
+    /// <summary>
+    /// Return the enemy that was hit
+    /// </summary>
+    /// <returns></returns>
+    public Enemy GetHitEnemy()
+    {
+        AimerCenter gobj = gameObject.transform.Find("AimerC").GetComponent<AimerCenter>();
+        return gobj.enemyHit();
+    }
 }

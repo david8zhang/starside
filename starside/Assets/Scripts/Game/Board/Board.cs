@@ -53,40 +53,19 @@ public class Board : MonoBehaviour {
                         enemPosY = 6;
                         enemCount++;
                     }
-//                    gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
-                }
-
-                else
-                { 
-                   // gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
                 }
             }
         }
         populated = true; 
     }
 
-    public void updateBoard(int enemyCode)
-    {
-        for(int i = 0; i < boardSize; i++)
-        {
-            for(int j = 0; j < boardSize; j++)
-            {
-                if(boardCodes[j, i] == enemyCode)
-                {
-                    print(j + "," + i + boardCodes[j, i]);
-                    boardCodes[j, i] = 0;
-                    enemyOutline[j, i].deactivate();
-//                    gridOutline[j, i] = CreateNewTile(tilePrefab, i, j).GetComponent<BoardTile>() as BoardTile;
-                }
-            }
-        }
-    }
 
     public void setEnemyRange(int x, int y){
         enemRangeX = x;
         enemRangeY = y; 
     }
 
+  
     public void genEnemy(int enemCount, int startx, int starty, int endx, int endy)
     {
         int enemyCode = enemCount + 1; 
@@ -95,19 +74,17 @@ public class Board : MonoBehaviour {
             for(int j = starty; j < endy; j++)
             {
                 boardCodes[j, i] = enemyCode; 
-                enemyOutline[j, i] = CreateNewTile(enemyTile, i, j).GetComponent<EnemyTile>() as EnemyTile;
             }
         }
         float xPos = (startx - 0.9f + endx) / 2;
         float yPos = (starty + endy) / 2; 
         GameObject o = Instantiate(enemyPrefab, new Vector3(xPos, yPos), Quaternion.identity) as GameObject;
         Enemy e = o.GetComponent<Enemy>();
-        e.setCode(enemyCode);
         e.setHealth(2 * (enemRangeX * enemRangeY));
         e.setDamage(25);
         enemyList.Add(e);
     }
-
+    
 
     public Enemy getEnemy(int enemyCode)
     {
