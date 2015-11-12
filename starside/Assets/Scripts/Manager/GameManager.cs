@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
             List<Enemy> enemies = board.getEnemies(); 
             foreach(Enemy enem in enemies)
             {
-                enem.attackPlayer(player);
+//                enem.attackPlayer(player);
                 print("Player Health: " + player.getCurrHP());
             }
         }
