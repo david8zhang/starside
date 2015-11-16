@@ -54,6 +54,10 @@
      <Compile Include="Assets\Scripts\Game\Board\EnemyTile.cs" />
      <Compile Include="Assets\Scripts\Game\Board\RandomGen.cs" />
      <Compile Include="Assets\Scripts\Game\Enemy\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Game\Planets\EasyPlanet.cs" />
+     <Compile Include="Assets\Scripts\Game\Planets\HardPlanet.cs" />
+     <Compile Include="Assets\Scripts\Game\Planets\MediumPlanet.cs" />
+     <Compile Include="Assets\Scripts\Game\Planets\Planet.cs" />
      <Compile Include="Assets\Scripts\Game\Player\DefenseUp.cs" />
      <Compile Include="Assets\Scripts\Game\Player\HealthUp.cs" />
      <Compile Include="Assets\Scripts\Game\Player\Player.cs" />
@@ -61,6 +65,7 @@
      <Compile Include="Assets\Scripts\Game\Player\PlayerUI.cs" />
      <Compile Include="Assets\Scripts\Game\Player\Powerup.cs" />
      <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Manager\LevelManager.cs" />
      <Compile Include="Assets\Scripts\Manager\Transparency.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

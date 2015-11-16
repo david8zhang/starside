@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 24e2d68cc3fdb65428689cc4c591bc1a
-timeCreated: 1446412504
+guid: 186d0570a64896a4bb3954c18a13b9f0
+timeCreated: 1447631313
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: tumblr_inline_mqd2g1SQJ41qz4rgp_0
-    21300002: tumblr_inline_mqd2g1SQJ41qz4rgp_1
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -40,38 +38,18 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 30
+  spritePixelsToUnits: 64
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites:
-    - name: tumblr_inline_mqd2g1SQJ41qz4rgp_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 168
-        width: 128
-        height: 54
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: tumblr_inline_mqd2g1SQJ41qz4rgp_1
-      rect:
-        serializedVersion: 2
-        x: 130
-        y: 168
-        width: 126
-        height: 58
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+    sprites: []
   spritePackingTag: 
   userData: 
   assetBundleName: 

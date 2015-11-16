@@ -14,9 +14,18 @@ public class GameManager : MonoBehaviour {
     private Board board; 
     private Aimer aimer;
 	public Player player;
-	private int aimerIndex; 
+    private int aimerIndex;
 
-    // Pre-initialization method
+    /// <summary>
+    /// Getter and setters
+    /// </summary>
+    /// <param name="newPlayer"></param>
+    void setPlayer(Player newPlayer) { player = newPlayer;  }
+    Player getPlayer () { return player;  }
+
+    /// <summary>
+    /// Pre-iniitalization
+    /// </summary>
     void Awake() {
         if (instance == null)
             instance = this;
