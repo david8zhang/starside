@@ -69,6 +69,12 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Generate a specific planet
+    /// </summary>
+    /// <param name="planetPrefab"></param>
+    /// <param name="i"></param>
+    /// <returns></returns>
     GameObject GeneratePlanet(GameObject planetPrefab, int i)
     {
         GameObject obj = Instantiate(planetPrefab, transform.position, transform.rotation) as GameObject;
@@ -137,5 +143,23 @@ public class LevelManager : MonoBehaviour {
             Debug.Log(index);
             UpdatePlanetFocus();
         }
+        else if(Input.GetKeyDown(KeyCode.Return))
+        {
+            levels[index].InstantiateGame();
+        }
 	}
+
+    /// <summary>
+    /// Deactivates all the planets
+    /// </summary>
+    public void DeactivatePlanets()
+    {
+        for (int i = 0; i < levels.Length; i++)
+        {
+            levels[i].gameObject.SetActive(false);
+        }
+        focus.position = new Vector3(4.45f, 0.7f, -11f);
+        Camera camera = focus.gameObject.GetComponent<Camera>();
+        camera.orthographicSize = 10.89541f;
+    }
 }

@@ -20,8 +20,10 @@ public class GameManager : MonoBehaviour {
     /// Getter and setters
     /// </summary>
     /// <param name="newPlayer"></param>
-    void setPlayer(Player newPlayer) { player = newPlayer;  }
-    Player getPlayer () { return player;  }
+    public void setPlayer(Player newPlayer) { player = newPlayer;  }
+    public Player getPlayer () { return player;  }
+    public void setBoard(Board newBoard) { board = newBoard; }
+    public Board getBoard() { return board; }
 
     /// <summary>
     /// Pre-iniitalization
@@ -41,8 +43,7 @@ public class GameManager : MonoBehaviour {
         //Grab the aimer game objects
         aimer = transform.FindChild("Aimer").GetComponent<Aimer>();
 
-        //Set the player
-        player = transform.FindChild("Player").GetComponent<Player>();
+        //Set the Player Attributes
 		player.setAttack(10);
     }
 

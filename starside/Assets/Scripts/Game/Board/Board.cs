@@ -79,9 +79,6 @@ public class Board : MonoBehaviour {
         float yPos = (starty + endy) / 2; 
         GameObject o = Instantiate(enemyPrefab, new Vector3(xPos, yPos), Quaternion.identity) as GameObject;
         Enemy e = o.GetComponent<Enemy>();
-        //        e.setHealth(2 * (enemRangeX * enemRangeY));
-        e.setHealth(1);
-        e.setDamage(25);
         if(enemCount == 1)
         {
             e.SetCurrPoint(0); //TODO: Hard Coded, will change later

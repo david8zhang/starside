@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+//TODO: Turn this into some kind of interface in order to create different enemy types??
 public class Enemy : MonoBehaviour
 {
     /// <summary>

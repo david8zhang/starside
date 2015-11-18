@@ -3,13 +3,30 @@ using System.Collections;
 
 public class MediumPlanet : Planet {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    /// <summary>
+    /// Constants for the enemies generated
+    /// </summary>
+    private static int ENEMY_DAMAGE = 10;
+    private static int ENEMY_HEALTH = 25;
+    private static int NUM_ENEMIES = 2;
+
+    /// <summary>
+    /// Implement the InstantiateGame method
+    /// </summary>
+    override
+    public void InstantiateGame()
+    {
+        GameObject obj = Instantiate(managerPrefab, position, Quaternion.identity) as GameObject;
+        manager = obj.GetComponent<GameManager>();
+        board = manager.getBoard();
+        board.setEnemies(NUM_ENEMIES);
+        enemies = board.getEnemies();
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].setHealth(ENEMY_HEALTH);
+            enemies[i].setDamage(ENEMY_DAMAGE);
+        }
+        LevelManager lm = transform.GetComponentInParent<LevelManager>();
+        lm.DeactivatePlanets();
+    }
 }
