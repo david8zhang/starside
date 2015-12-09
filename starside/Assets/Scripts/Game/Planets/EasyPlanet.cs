@@ -28,6 +28,7 @@ public class EasyPlanet : Planet {
         }
         LevelManager lm = transform.GetComponentInParent<LevelManager>();
         lm.DeactivatePlanets();
+		lm.transform.Find ("Canvas").gameObject.SetActive (true); 
     }
 
 

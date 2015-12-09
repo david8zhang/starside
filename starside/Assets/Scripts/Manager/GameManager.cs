@@ -45,6 +45,10 @@ public class GameManager : MonoBehaviour {
 
         //Set the Player Attributes
 		player.setAttack(10);
+		player.setHP (100);
+		player.setEXP (10);
+		player.setDefense (15);
+		player.setLuck (10);
     }
 
     void Start()
