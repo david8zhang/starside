@@ -31,17 +31,7 @@ public class Player : MonoBehaviour
 	// private Dictionary<string, int> attributes;
 	/** Power-ups that the player currently has and can use in battles. */
 	// private List<Powerup> upgrades;
-	
-	void Awake() {
-		level = 1;
-		EXP = 1000;
-		totalEXP = 2000;
-		HP = 50;
-		currentHP = HP;
-		defense = 5;
-		luck = 5;
-		attack = 5; 
-	}
+
 	private List<Powerup> upgrades;
 
 	/** Returns the player's HP */
@@ -54,6 +44,10 @@ public class Player : MonoBehaviour
 	public void setHP(int newHP)
 	{
 		HP = newHP;
+	}
+	/** Set the player's current HP to CURRHP */
+	public void setCurrHP(int currHP) {
+		currentHP = currHP;
 	}
 	/** Returns the player's current HP */
 	public int getCurrHP() {

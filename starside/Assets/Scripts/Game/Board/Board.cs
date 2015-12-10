@@ -34,60 +34,37 @@ public class Board : MonoBehaviour {
         boardCodes = new int[boardSize, boardSize];
     }
 
-    //Initalize the board
-    public void InitBoard()
+	/// <summary>
+	/// Inits the board.
+	/// </summary>
+	/// <param name="startpos">Startpos.</param>
+	/// <param name="enemCount">Enem count.</param>
+	/// <param name="enemHealth">Enem health.</param>
+	/// <param name="enemDamage">Enem damage.</param>
+	public void InitBoard(Vector3[] startpos, int enemCount, int[] enemHealth, int[] enemDamage)
     {
-        int enemPosX = 1; //Hard coded stuff, just for simplicity sake
-        int enemPosY = 1;
-        int enemCount = 0;
-        for (int i = 0; i < boardSize; i++)
-        {
-            for (int j = 0; j < boardSize; j++)
-            {
-                if (enemCount < numEnemies)
-                {
-                    if (i == enemPosX && j == enemPosY)
-                    {
-                        genEnemy(enemCount, i, j, i + enemRangeX, j + enemRangeY);
-                        enemPosX = 5;
-                        enemPosY = 6;
-                        enemCount++;
-                    }
-                }
-            }
-        }
+		for (int i = 0; i < enemCount; i++) {
+			genEnemy(startpos[i], enemHealth[i], enemDamage[i], i);
+		}
         populated = true; 
     }
-
-
-    public void setEnemyRange(int x, int y){
-        enemRangeX = x;
-        enemRangeY = y; 
-    }
-
-    /// <summary>
-    /// Generate an enemy at the given position
-    /// </summary>
-    /// <param name="enemCount"></param>
-    /// <param name="startx"></param>
-    /// <param name="starty"></param>
-    /// <param name="endx"></param>
-    /// <param name="endy"></param>
-    public void genEnemy(int enemCount, int startx, int starty, int endx, int endy)
+	
+	/// <summary>
+	/// Gens the enemy.
+	/// </summary>
+	/// <param name="startpos">Startpos.</param>
+	/// <param name="health">Health.</param>
+	/// <param name="damage">Damage.</param>
+	public void genEnemy(Vector3 startpos, int health, int damage, int code)
     {
-        float xPos = (startx - 0.9f + endx) / 2;
-        float yPos = (starty + endy) / 2; 
-        GameObject o = Instantiate(enemyPrefab, new Vector3(xPos, yPos), Quaternion.identity) as GameObject;
-        Enemy e = o.GetComponent<Enemy>();
-        if(enemCount == 1)
-        {
-            e.SetCurrPoint(0); //TODO: Hard Coded, will change later
-        } else
-        {
-            e.SetCurrPoint(2);
-        }
-        Debug.Log(xPos + "," + yPos);
-        enemyList.Add(e);
+		Debug.Log (startpos);
+		GameObject enemy = Instantiate (enemyPrefab, startpos, Quaternion.identity) as GameObject;
+		Enemy newenem = enemy.GetComponent<Enemy> ();
+		newenem.setHealth (health);
+		newenem.setDamage (damage);
+		newenem.setCode (code);
+		newenem.SetCurrPoint (code);
+		enemyList.Add (newenem);
     }
     
 
@@ -147,6 +124,13 @@ public class Board : MonoBehaviour {
         return populated; 
     }
 
+	/// <summary>
+	/// Creates the new tile.
+	/// </summary>
+	/// <returns>The new tile.</returns>
+	/// <param name="prefab">Prefab.</param>
+	/// <param name="x">The x coordinate.</param>
+	/// <param name="y">The y coordinate.</param>
     public GameObject CreateNewTile(GameObject prefab, int x, int y)
     {
         GameObject o = Instantiate(prefab, new Vector3(x, y), Quaternion.identity) as GameObject;
@@ -156,16 +140,28 @@ public class Board : MonoBehaviour {
         return o;
     }
 
+	/// <summary>
+	/// Sets the enemies.
+	/// </summary>
+	/// <param name="numEnemies">Number enemies.</param>
     public void setEnemies(int numEnemies)
     {
         this.numEnemies = numEnemies; 
     }
 
+	/// <summary>
+	/// Gets the number enemies.
+	/// </summary>
+	/// <returns>The number enemies.</returns>
     public int getNumEnemies()
     {
         return numEnemies; 
     }
 
+	/// <summary>
+	/// Gets the board codes.
+	/// </summary>
+	/// <returns>The board codes.</returns>
     public int[,] getBoardCodes()
     {
         return boardCodes; 

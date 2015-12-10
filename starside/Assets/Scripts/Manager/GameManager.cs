@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
         //Set the Player Attributes
 		player.setAttack(10);
 		player.setHP (100);
+		player.setCurrHP (100);
 		player.setEXP (10);
 		player.setDefense (15);
 		player.setLuck (10);
@@ -53,9 +54,6 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        board.setEnemies(2); //Hard coded
-        board.setEnemyRange(4, 3); //Hard Coded
-        board.InitBoard();
         StartCoroutine("Init");
     }
 
@@ -125,7 +123,7 @@ public class GameManager : MonoBehaviour {
         aiming = true;
         if (board.getEnemies().Count == 0)
         {
-            Application.LoadLevel("GameOver");
+            Application.LoadLevel("Starmap");
         } else
         {
             StartCoroutine("Aim");
@@ -137,7 +135,7 @@ public class GameManager : MonoBehaviour {
     {
         float yBorder = (Camera.main.orthographicSize * 2) * (3.0f / 4.0f) - 3.5f;
         return (Input.GetMouseButtonDown(0) &&
-            Camera.main.ScreenToWorldPoint(Input.mousePosition).y < yBorder); 
+        Camera.main.ScreenToWorldPoint(Input.mousePosition).y < yBorder); 
     }
 	
 	// Update is called once per frame

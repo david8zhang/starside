@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     public int damage;
     public int enemyCode;
-    private int health;
+    public int health;
     private bool isDead = false;
 
     /// <summary>
