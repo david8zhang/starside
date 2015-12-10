@@ -36,7 +36,8 @@ public class PlayerUI : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
+		Debug.Log (player.getCurrHP ());
 		EXPBar.maxValue = player.getTotalEXP ();
 		EXPBar.value = player.getEXP ();
 		healthBar.maxValue = player.getHP ();

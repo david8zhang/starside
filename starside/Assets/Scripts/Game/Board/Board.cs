@@ -17,7 +17,6 @@ public class Board : MonoBehaviour {
     //Prefab objects
     public GameObject tilePrefab;
     public GameObject enemyTile;
-    public GameObject enemyPrefab; 
 
     //Enemy attributes
     private int enemRangeX;
@@ -41,10 +40,10 @@ public class Board : MonoBehaviour {
 	/// <param name="enemCount">Enem count.</param>
 	/// <param name="enemHealth">Enem health.</param>
 	/// <param name="enemDamage">Enem damage.</param>
-	public void InitBoard(Vector3[] startpos, int enemCount, int[] enemHealth, int[] enemDamage)
+	public void InitBoard(Vector3[] startpos, int enemCount, int[] enemHealth, int[] enemDamage, GameObject enemPrefab)
     {
 		for (int i = 0; i < enemCount; i++) {
-			genEnemy(startpos[i], enemHealth[i], enemDamage[i], i);
+			genEnemy(startpos[i], enemHealth[i], enemDamage[i], i, enemPrefab);
 		}
         populated = true; 
     }
@@ -55,7 +54,7 @@ public class Board : MonoBehaviour {
 	/// <param name="startpos">Startpos.</param>
 	/// <param name="health">Health.</param>
 	/// <param name="damage">Damage.</param>
-	public void genEnemy(Vector3 startpos, int health, int damage, int code)
+	public void genEnemy(Vector3 startpos, int health, int damage, int code, GameObject enemyPrefab)
     {
 		Debug.Log (startpos);
 		GameObject enemy = Instantiate (enemyPrefab, startpos, Quaternion.identity) as GameObject;

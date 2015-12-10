@@ -110,6 +110,9 @@ public class Enemy : MonoBehaviour
     /// <param name="damage"></param>
     public void takeHit(int damage)
     {
+		if (gameObject.activeSelf) {
+			StartCoroutine ("flash");
+		}
         if(health - damage <= 0)
         {
             isDead = true; 
@@ -169,6 +172,12 @@ public class Enemy : MonoBehaviour
         health = newHealth;
     }
 
+	/** Flash red after being hit.*/
+	IEnumerator flash() {
+			gameObject.GetComponent<SpriteRenderer> ().material.color = Color.green;
+			yield return new WaitForSeconds (0.1f);
+			gameObject.GetComponent<SpriteRenderer> ().material.color = Color.white;
+	}
 
     /// <summary>
     /// Return this health

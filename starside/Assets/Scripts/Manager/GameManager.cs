@@ -42,19 +42,18 @@ public class GameManager : MonoBehaviour {
 
         //Grab the aimer game objects
         aimer = transform.FindChild("Aimer").GetComponent<Aimer>();
-
-        //Set the Player Attributes
-		player.setAttack(10);
-		player.setHP (100);
-		player.setCurrHP (100);
-		player.setEXP (10);
-		player.setDefense (15);
-		player.setLuck (10);
     }
 
     void Start()
     {
         StartCoroutine("Init");
+		//Set the Player Attributes
+		player.setAttack(10);
+		player.setHP (100);
+		player.setCurrHP (100);
+		player.setEXP (10);
+		player.setDefense (5);
+		player.setLuck (5);
     }
 
     //Initializing the board, (and the enemies) 
@@ -115,13 +114,13 @@ public class GameManager : MonoBehaviour {
             List<Enemy> enemies = board.getEnemies(); 
             foreach(Enemy enem in enemies)
             {
-//                enem.attackPlayer(player);
+                enem.attackPlayer(player);
                 print("Player Health: " + player.getCurrHP());
             }
         }
         yield return new WaitForSeconds(10.0f / 60.0f);
         aiming = true;
-        if (board.getEnemies().Count == 0)
+        if (board.getEnemies().Count == 0 || player.getCurrHP() == 0)
         {
             Application.LoadLevel("Starmap");
         } else
@@ -140,6 +139,5 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
 	}
 }

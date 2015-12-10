@@ -19,6 +19,11 @@ public abstract class Planet : MonoBehaviour {
 	/// </summary>
 	public int ENEMY_DAMAGE;
 
+	/// <summary>
+	/// The enemy prefab (for determining sprites)
+	/// </summary>
+	public GameObject ENEMY_PREFAB;
+
     /// <summary>
     /// The Game Manager instance
     /// </summary>
@@ -55,10 +60,9 @@ public abstract class Planet : MonoBehaviour {
 		Vector3[] startpos = setStartPos (); 
 		int[] health = setHealth ();
 		int[] damage = setDamage ();
-		board.InitBoard (startpos, NUM_ENEMIES, health, damage);  
+		board.InitBoard (startpos, NUM_ENEMIES, health, damage, ENEMY_PREFAB);  
 		LevelManager lm = transform.GetComponentInParent<LevelManager>();
 		lm.DeactivatePlanets();
-		lm.transform.Find ("Canvas").gameObject.SetActive (true); 
 	}
 
 	/// <summary>
